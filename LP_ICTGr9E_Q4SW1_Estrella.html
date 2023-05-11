@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Andre's JavaScript Quiz</title>
+</head>
+<body>
+    <h1>ICT Semi-Beginner JavaScript Quiz</h1>
+    <div id="question"></div>
+    <div id="choices"></div>
+    <script>
+        let currentQuestion = 0;
+        let score = 0;
+        const questions = [
+            {
+                question: "What is the correct way to write a JavaScript array?",
+                choices: ["var colors = 'red', 'green', 'blue'", "var colors = ['red', 'green', 'blue']", "var colors = (1:'red', 2:'green', 3:'blue')", "var colors = 1 = ('red'), 2 = ('green'), 3 = ('blue')"],
+                correctAnswer: 1
+            },
+            {
+                question: "How do you round the number 7.25, to the nearest integer?",
+                choices: ["Math.rnd(7.25)", "round(7.25)", "rnd(7.25)", "Math.round(7.25)"],
+                correctAnswer: 3
+            },
+            {
+                question: "How do you find the number with the highest value of x and y?",
+                choices: ["Math.ceil(x, y)", "top(x, y)", "Math.max(x, y)", "ceil(x, y)"],
+                correctAnswer: 2
+            },
+            {
+                question: "Which event occurs when the user clicks on an HTML element?",
+                choices: ["onclick", "onmouseover", "onmouseclick", "onchange"],
+                correctAnswer: 0
+            },
+            {
+                question: "How do you declare a JavaScript variable?",
+                choices: ["variable carName;", "v carName;", "carName;", "var carName;"],
+                correctAnswer: 3
+            }
+        ];
+        
+        function displayQuestion() {
+            const questionElement = document.getElementById("question");
+            const choicesElement = document.getElementById("choices");
+            
+            questionElement.innerHTML = questions[currentQuestion].question;
+            
+            let choicesHTML = "";
+            for (let i = 0; i < questions[currentQuestion].choices.length; i++) {
+                choicesHTML += `<button onclick="checkAnswer(${i})">${questions[currentQuestion].choices[i]}</button><br>`;
+            }
+            
+            choicesElement.innerHTML = choicesHTML;
+        }
+        
+        function checkAnswer(choice) {
+            if (choice === questions[currentQuestion].correctAnswer) {
+                score++;
+                alert("Correct!");
+                
+                if (currentQuestion === questions.length - 1) {
+                    alert(`Game over! You got a perfect score, Congratulations!`);
+                    currentQuestion = 0;
+                    score = 0;
+                    displayQuestion();
+                } else {
+                    currentQuestion++;
+                    displayQuestion();
+                }
+            } else {
+                alert(`Game over! Your score is ${score}`);
+                currentQuestion = 0;
+                score = 0;
+                displayQuestion();
+            }
+        }
+        
+        displayQuestion();
+    </script>
+</body>
+</html>
